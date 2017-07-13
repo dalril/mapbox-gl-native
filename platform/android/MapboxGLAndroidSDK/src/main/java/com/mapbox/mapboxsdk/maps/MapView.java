@@ -66,6 +66,7 @@ public class MapView extends FrameLayout {
 
   private MapboxMap mapboxMap;
   private MapCallback mapCallback;
+  private MapChangeDispatch mapChangeDispatch;
 
   private MapGestureDetector mapGestureDetector;
   private MapKeyListener mapKeyListener;
@@ -115,7 +116,7 @@ public class MapView extends FrameLayout {
     setContentDescription(context.getString(R.string.mapbox_mapActionDescription));
 
     // create native Map object
-    nativeMapView = new NativeMapView(this);
+    nativeMapView = new NativeMapView(this, mapChangeDispatch = new MapChangeDispatch());
 
     // callback for focal point invalidation
     FocalPointInvalidator focalPoint = new FocalPointInvalidator(compassView);
@@ -532,6 +533,7 @@ public class MapView extends FrameLayout {
   // Map events
   //
 
+
   /**
    * <p>
    * Add a callback that's invoked when the displayed map view changes.
@@ -540,7 +542,16 @@ public class MapView extends FrameLayout {
    *
    * @param listener The callback that's invoked on every frame rendered to the map view.
    * @see MapView#removeOnMapChangedListener(OnMapChangedListener)
+   * @deprecated use {@link OnCameraRegionWillChangeListener}, {@link OnCameraRegionWillChangeAnimatedListener},
+   * {@link OnCameraRegionDidChangeListener}, {@link OnCameraRegionDidChangeAnimatedListener},
+   * {@link OnCameraIsChangingListener}, {@link OnWillStartLoadingMapListener}, {@link OnDidFinishLoadingMapListener},
+   * {@link OnDidFailLoadingMapListener}, {@link OnDidFinishRenderingFrameListener},
+   * {@link OnDidFinishRenderingFrameListener}, {@link OnDidFinishRenderingFrameFullyRenderedListener},
+   * {@link OnWillStartRenderingMapListener}. {@link OnDidFinishRenderingMapListener},
+   * {@link OnDidFinishRenderingMapFullyRenderedListener}, {@link OnDidFinishLoadingStyleListener} and
+   * {@link OnSourceChangedListener} instead
    */
+  @Deprecated
   public void addOnMapChangedListener(@Nullable OnMapChangedListener listener) {
     if (listener != null) {
       nativeMapView.addOnMapChangedListener(listener);
@@ -552,11 +563,83 @@ public class MapView extends FrameLayout {
    *
    * @param listener The previously added callback to remove.
    * @see MapView#addOnMapChangedListener(OnMapChangedListener)
+   * @deprecated use {@link OnCameraRegionWillChangeListener}, {@link OnCameraRegionWillChangeAnimatedListener},
+   * {@link OnCameraRegionDidChangeListener}, {@link OnCameraRegionDidChangeAnimatedListener},
+   * {@link OnCameraIsChangingListener}, {@link OnWillStartLoadingMapListener}, {@link OnDidFinishLoadingMapListener},
+   * {@link OnDidFailLoadingMapListener}, {@link OnDidFinishRenderingFrameListener},
+   * {@link OnDidFinishRenderingFrameListener}, {@link OnDidFinishRenderingFrameFullyRenderedListener},
+   * {@link OnWillStartRenderingMapListener}. {@link OnDidFinishRenderingMapListener},
+   * {@link OnDidFinishRenderingMapFullyRenderedListener}, {@link OnDidFinishLoadingStyleListener} and
+   * {@link OnSourceChangedListener} instead
    */
   public void removeOnMapChangedListener(@Nullable OnMapChangedListener listener) {
     if (listener != null) {
       nativeMapView.removeOnMapChangedListener(listener);
     }
+  }
+
+  public void setOnCameraRegionWillChangeListener(OnCameraRegionWillChangeListener onCameraRegionWillChangeListener) {
+    mapChangeDispatch.setOnCameraRegionWillChangeListener(onCameraRegionWillChangeListener);
+  }
+
+  public void setOnCameraRegionWillChangeAnimatedListener(OnCameraRegionWillChangeAnimatedListener onCameraRegionWillChangeAnimatedListener) {
+    mapChangeDispatch.setOnCameraRegionWillChangeAnimatedListener(onCameraRegionWillChangeAnimatedListener);
+  }
+
+  public void setOnCameraIsChangingListener(OnCameraIsChangingListener onCameraIsChangingListener) {
+    mapChangeDispatch.setOnCameraIsChangingListener(onCameraIsChangingListener);
+  }
+
+  public void setOnCameraRegionDidChangeListener(OnCameraRegionDidChangeListener onCameraRegionDidChangeListener) {
+    mapChangeDispatch.setOnCameraRegionDidChangeListener(onCameraRegionDidChangeListener);
+  }
+
+  public void setOnCameraRegionDidChangeAnimatedListener(OnCameraRegionDidChangeAnimatedListener onCameraRegionDidChangeAnimatedListener) {
+    mapChangeDispatch.setOnCameraRegionDidChangeAnimatedListener(onCameraRegionDidChangeAnimatedListener);
+  }
+
+  public void setOnWillStartLoadingMapListener(OnWillStartLoadingMapListener onWillStartLoadingMapListener) {
+    mapChangeDispatch.setOnWillStartLoadingMapListener(onWillStartLoadingMapListener);
+  }
+
+  public void setOnDidFinishLoadingMapListener(OnDidFinishLoadingMapListener onDidFinishLoadingMapListener) {
+    mapChangeDispatch.setOnDidFinishLoadingMapListener(onDidFinishLoadingMapListener);
+  }
+
+  public void setOnDidFailLoadingMapListener(OnDidFailLoadingMapListener onDidFailLoadingMapListener) {
+    mapChangeDispatch.setOnDidFailLoadingMapListener(onDidFailLoadingMapListener);
+  }
+
+  public void setOnWillStartRenderingFrameListener(OnWillStartRenderingFrameListener onWillStartRenderingFrameListener) {
+    mapChangeDispatch.setOnWillStartRenderingFrameListener(onWillStartRenderingFrameListener);
+  }
+
+  public void setOnDidFinishRenderingFrameListener(OnDidFinishRenderingFrameListener onDidFinishRenderingFrameListener) {
+    mapChangeDispatch.setOnDidFinishRenderingFrameListener(onDidFinishRenderingFrameListener);
+  }
+
+  public void setOnDidFinishRenderingFrameFullyRenderedListener(OnDidFinishRenderingFrameFullyRenderedListener onDidFinishRenderingFrameFullyRenderedListener) {
+    mapChangeDispatch.setOnDidFinishRenderingFrameFullyRenderedListener(onDidFinishRenderingFrameFullyRenderedListener);
+  }
+
+  public void setOnWillStartRenderingMapListener(OnWillStartRenderingMapListener onWillStartRenderingMapListener) {
+    mapChangeDispatch.setOnWillStartRenderingMapListener(onWillStartRenderingMapListener);
+  }
+
+  public void setOnDidFinishRenderingMapListener(OnDidFinishRenderingMapListener onDidFinishRenderingMapListener) {
+    mapChangeDispatch.setOnDidFinishRenderingMapListener(onDidFinishRenderingMapListener);
+  }
+
+  public void setOnDidFinishRenderingMapFullyRenderedListener(OnDidFinishRenderingMapFullyRenderedListener onDidFinishRenderingMapFullyRenderedListener) {
+    mapChangeDispatch.setOnDidFinishRenderingMapFullyRenderedListener(onDidFinishRenderingMapFullyRenderedListener);
+  }
+
+  public void setOnDidFinishLoadingStyleListener(OnDidFinishLoadingStyleListener onDidFinishLoadingStyleListener) {
+    mapChangeDispatch.setOnDidFinishLoadingStyleListener(onDidFinishLoadingStyleListener);
+  }
+
+  public void setOnSourceChangedListener(OnSourceChangedListener onSourceChangedListener) {
+    mapChangeDispatch.setOnSourceChangedListener(onSourceChangedListener);
   }
 
   /**
@@ -587,6 +670,14 @@ public class MapView extends FrameLayout {
    * Definition of a map change event.
    *
    * @see MapView.OnMapChangedListener#onMapChanged(int)
+   * @deprecated use {@link OnCameraRegionWillChangeListener}, {@link OnCameraRegionWillChangeAnimatedListener},
+   * {@link OnCameraRegionDidChangeListener}, {@link OnCameraRegionDidChangeAnimatedListener},
+   * {@link OnCameraIsChangingListener}, {@link OnWillStartLoadingMapListener}, {@link OnDidFinishLoadingMapListener},
+   * {@link OnDidFailLoadingMapListener}, {@link OnDidFinishRenderingFrameListener},
+   * {@link OnDidFinishRenderingFrameListener}, {@link OnDidFinishRenderingFrameFullyRenderedListener},
+   * {@link OnWillStartRenderingMapListener}. {@link OnDidFinishRenderingMapListener},
+   * {@link OnDidFinishRenderingMapFullyRenderedListener}, {@link OnDidFinishLoadingStyleListener} and
+   * {@link OnSourceChangedListener} instead
    */
   @IntDef( {REGION_WILL_CHANGE,
     REGION_WILL_CHANGE_ANIMATED,
@@ -606,6 +697,7 @@ public class MapView extends FrameLayout {
     SOURCE_DID_CHANGE
   })
   @Retention(RetentionPolicy.SOURCE)
+  @Deprecated
   public @interface MapChange {
   }
 
@@ -618,7 +710,9 @@ public class MapView extends FrameLayout {
    *
    * @see MapChange
    * @see MapView.OnMapChangedListener
+   * @deprecated use {@link OnCameraRegionWillChangeListener} instead
    */
+  @Deprecated
   public static final int REGION_WILL_CHANGE = 0;
 
   /**
@@ -630,7 +724,9 @@ public class MapView extends FrameLayout {
    *
    * @see MapChange
    * @see MapView.OnMapChangedListener
+   * @deprecated use {@link OnCameraRegionWillChangeAnimatedListener} instead
    */
+  @Deprecated
   public static final int REGION_WILL_CHANGE_ANIMATED = 1;
 
   /**
@@ -641,7 +737,9 @@ public class MapView extends FrameLayout {
    *
    * @see MapChange
    * @see MapView.OnMapChangedListener
+   * @deprecated use {@link OnCameraIsChangingListener} instead
    */
+  @Deprecated
   public static final int REGION_IS_CHANGING = 2;
 
   /**
@@ -653,7 +751,9 @@ public class MapView extends FrameLayout {
    *
    * @see MapChange
    * @see MapView.OnMapChangedListener
+   * @deprecated use {@link OnCameraRegionDidChangeListener} instead
    */
+  @Deprecated
   public static final int REGION_DID_CHANGE = 3;
 
   /**
@@ -665,7 +765,9 @@ public class MapView extends FrameLayout {
    *
    * @see MapChange
    * @see MapView.OnMapChangedListener
+   * @deprecated use {@link OnCameraRegionDidChangeAnimatedListener} instead
    */
+  @Deprecated
   public static final int REGION_DID_CHANGE_ANIMATED = 4;
 
   /**
@@ -676,7 +778,9 @@ public class MapView extends FrameLayout {
    *
    * @see MapChange
    * @see MapView.OnMapChangedListener
+   * @deprecated use {@link OnWillStartLoadingMapListener} instead
    */
+  @Deprecated
   public static final int WILL_START_LOADING_MAP = 5;
 
   /**
@@ -687,7 +791,9 @@ public class MapView extends FrameLayout {
    *
    * @see MapChange
    * @see MapView.OnMapChangedListener
+   * @deprecated use {@link OnDidFinishLoadingMapListener} instead
    */
+  @Deprecated
   public static final int DID_FINISH_LOADING_MAP = 6;
 
   /**
@@ -698,7 +804,9 @@ public class MapView extends FrameLayout {
    *
    * @see MapChange
    * @see MapView.OnMapChangedListener
+   * @deprecated use {@link OnDidFailLoadingMapListener} instead
    */
+  @Deprecated
   public static final int DID_FAIL_LOADING_MAP = 7;
 
   /**
@@ -709,7 +817,9 @@ public class MapView extends FrameLayout {
    *
    * @see MapChange
    * @see MapView.OnMapChangedListener
+   * @deprecated use {@link OnWillStartRenderingFrameListener} instead
    */
+  @Deprecated
   public static final int WILL_START_RENDERING_FRAME = 8;
 
   /**
@@ -720,7 +830,9 @@ public class MapView extends FrameLayout {
    *
    * @see MapChange
    * @see MapView.OnMapChangedListener
+   * @deprecated use {@link OnDidFinishRenderingFrameListener} instead
    */
+  @Deprecated
   public static final int DID_FINISH_RENDERING_FRAME = 9;
 
   /**
@@ -731,7 +843,9 @@ public class MapView extends FrameLayout {
    *
    * @see MapChange
    * @see MapView.OnMapChangedListener
+   * @deprecated use {@link OnDidFinishRenderingFrameFullyRenderedListener} instead
    */
+  @Deprecated
   public static final int DID_FINISH_RENDERING_FRAME_FULLY_RENDERED = 10;
 
   /**
@@ -742,7 +856,9 @@ public class MapView extends FrameLayout {
    *
    * @see MapChange
    * @see MapView.OnMapChangedListener
+   * @deprecated use {@link OnWillStartRenderingMapListener} instead
    */
+  @Deprecated
   public static final int WILL_START_RENDERING_MAP = 11;
 
   /**
@@ -753,7 +869,9 @@ public class MapView extends FrameLayout {
    *
    * @see MapChange
    * @see MapView.OnMapChangedListener
+   * @deprecated use {@link OnDidFinishRenderingMapListener} instead
    */
+  @Deprecated
   public static final int DID_FINISH_RENDERING_MAP = 12;
 
   /**
@@ -764,7 +882,9 @@ public class MapView extends FrameLayout {
    *
    * @see MapChange
    * @see MapView.OnMapChangedListener
+   * @deprecated use {@link OnDidFinishRenderingMapFullyRenderedListener} instead
    */
+  @Deprecated
   public static final int DID_FINISH_RENDERING_MAP_FULLY_RENDERED = 13;
 
   /**
@@ -775,7 +895,9 @@ public class MapView extends FrameLayout {
    *
    * @see MapChange
    * @see MapView.OnMapChangedListener
+   * @deprecated use {@link OnDidFinishLoadingStyleListener} instead
    */
+  @Deprecated
   public static final int DID_FINISH_LOADING_STYLE = 14;
 
   /**
@@ -786,8 +908,74 @@ public class MapView extends FrameLayout {
    *
    * @see MapChange
    * @see MapView.OnMapChangedListener
+   * @deprecated use {@link OnSourceChangedListener} instead
    */
+  @Deprecated
   public static final int SOURCE_DID_CHANGE = 15;
+
+  public interface OnCameraRegionWillChangeListener {
+    void onCameraRegionWillChange();
+  }
+
+  public interface OnCameraRegionWillChangeAnimatedListener {
+    void onCameraRegionWillChangeAnimated();
+  }
+
+  public interface OnCameraIsChangingListener {
+    void onCameraIsChanging();
+  }
+
+  public interface OnCameraRegionDidChangeListener {
+    void onCameraRegionDidChange();
+  }
+
+  public interface OnCameraRegionDidChangeAnimatedListener {
+    void onCameraRegionDidChangeAnimated();
+  }
+
+  public interface OnWillStartLoadingMapListener {
+    void onWillStartLoadingMap();
+  }
+
+  public interface OnDidFinishLoadingMapListener {
+    void onDidFinishLoadingMap();
+  }
+
+  public interface OnDidFailLoadingMapListener {
+    void onDidFailLoadingMap();
+  }
+
+  public interface OnWillStartRenderingFrameListener {
+    void onWillStartRenderingFrame();
+  }
+
+  public interface OnDidFinishRenderingFrameListener {
+    void onDidFinishRenderingFrame();
+  }
+
+  public interface OnDidFinishRenderingFrameFullyRenderedListener {
+    void onDidFinishRenderingFrameFullyRendered();
+  }
+
+  public interface OnWillStartRenderingMapListener {
+    void onWillStartRenderingMap();
+  }
+
+  public interface OnDidFinishRenderingMapListener {
+    void onDidFinishRenderingMap();
+  }
+
+  public interface OnDidFinishRenderingMapFullyRenderedListener {
+    void onDidFinishRenderingMapFullyRendered();
+  }
+
+  public interface OnDidFinishLoadingStyleListener {
+    void onDidFinishLoadingStyle();
+  }
+
+  public interface OnSourceChangedListener {
+    void onSourceChangedListener();
+  }
 
   /**
    * Interface definition for a callback to be invoked when the displayed map view changes.
@@ -797,6 +985,14 @@ public class MapView extends FrameLayout {
    *
    * @see MapView#addOnMapChangedListener(OnMapChangedListener)
    * @see MapView.MapChange
+   * @deprecated use {@link OnCameraRegionWillChangeListener}, {@link OnCameraRegionWillChangeAnimatedListener},
+   * {@link OnCameraRegionDidChangeListener}, {@link OnCameraRegionDidChangeAnimatedListener},
+   * {@link OnCameraIsChangingListener}, {@link OnWillStartLoadingMapListener}, {@link OnDidFinishLoadingMapListener},
+   * {@link OnDidFailLoadingMapListener}, {@link OnDidFinishRenderingFrameListener},
+   * {@link OnDidFinishRenderingFrameListener}, {@link OnDidFinishRenderingFrameFullyRenderedListener},
+   * {@link OnWillStartRenderingMapListener}. {@link OnDidFinishRenderingMapListener},
+   * {@link OnDidFinishRenderingMapFullyRenderedListener}, {@link OnDidFinishLoadingStyleListener} and
+   * {@link OnSourceChangedListener} instead
    */
   public interface OnMapChangedListener {
     /**
