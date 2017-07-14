@@ -12,55 +12,55 @@ public class MapChangeDispatchTest {
   private MapChangeDispatch mapChangeDispatch;
 
   @Mock
-  MapView.OnCameraRegionWillChangeListener onCameraRegionWillChangeListener;
+  private MapView.OnCameraRegionWillChangeListener onCameraRegionWillChangeListener;
 
   @Mock
-  MapView.OnCameraRegionWillChangeAnimatedListener onCameraRegionWillChangeAnimatedListener;
+  private MapView.OnCameraRegionWillChangeAnimatedListener onCameraRegionWillChangeAnimatedListener;
 
   @Mock
-  MapView.OnCameraIsChangingListener onCameraIsChangingListener;
+  private MapView.OnCameraIsChangingListener onCameraIsChangingListener;
 
   @Mock
-  MapView.OnCameraRegionDidChangeListener onCameraRegionDidChangeListener;
+  private MapView.OnCameraRegionDidChangeListener onCameraRegionDidChangeListener;
 
   @Mock
-  MapView.OnCameraRegionDidChangeAnimatedListener onCameraRegionDidChangeAnimatedListener;
+  private MapView.OnCameraRegionDidChangeAnimatedListener onCameraRegionDidChangeAnimatedListener;
 
   @Mock
-  MapView.OnWillStartLoadingMapListener onWillStartLoadingMapListener;
+  private MapView.OnWillStartLoadingMapListener onWillStartLoadingMapListener;
 
   @Mock
-  MapView.OnDidFinishLoadingMapListener onDidFinishLoadingMapListener;
+  private MapView.OnDidFinishLoadingMapListener onDidFinishLoadingMapListener;
 
   @Mock
-  MapView.OnDidFailLoadingMapListener onDidFailLoadingMapListener;
+  private MapView.OnDidFailLoadingMapListener onDidFailLoadingMapListener;
 
   @Mock
-  MapView.OnWillStartRenderingFrameListener onWillStartRenderingFrameListener;
+  private MapView.OnWillStartRenderingFrameListener onWillStartRenderingFrameListener;
 
   @Mock
-  MapView.OnDidFinishRenderingFrameListener onDidFinishRenderingFrameListener;
+  private MapView.OnDidFinishRenderingFrameListener onDidFinishRenderingFrameListener;
 
   @Mock
-  MapView.OnDidFinishRenderingFrameFullyRenderedListener onDidFinishRenderingFrameFullyRenderedListener;
+  private MapView.OnDidFinishRenderingFrameFullyRenderedListener onDidFinishRenderingFrameFullyRenderedListener;
 
   @Mock
-  MapView.OnWillStartRenderingMapListener onWillStartRenderingMapListener;
+  private MapView.OnWillStartRenderingMapListener onWillStartRenderingMapListener;
 
   @Mock
-  MapView.OnDidFinishRenderingMapListener onDidFinishRenderingMapListener;
+  private MapView.OnDidFinishRenderingMapListener onDidFinishRenderingMapListener;
 
   @Mock
-  MapView.OnDidFinishRenderingMapFullyRenderedListener onDidFinishRenderingMapFullyRenderedListener;
+  private MapView.OnDidFinishRenderingMapFullyRenderedListener onDidFinishRenderingMapFullyRenderedListener;
 
   @Mock
-  MapView.OnDidFinishLoadingStyleListener onDidFinishLoadingStyleListener;
+  private MapView.OnDidFinishLoadingStyleListener onDidFinishLoadingStyleListener;
 
   @Mock
-  MapView.OnSourceChangedListener onSourceChangedListener;
+  private MapView.OnSourceChangedListener onSourceChangedListener;
 
   @Mock
-  MapView.OnMapChangedListener onMapChangedListener;
+  private MapView.OnMapChangedListener onMapChangedListener;
 
   @Before
   public void beforeTest() {

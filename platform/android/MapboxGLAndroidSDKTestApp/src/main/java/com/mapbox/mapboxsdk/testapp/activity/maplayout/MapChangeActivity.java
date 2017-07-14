@@ -26,12 +26,116 @@ public class MapChangeActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_map_simple);
 
-    final LongSparseArray<String> mapChangeMap = buildMapChangeStringValueSparseArray();
     mapView = (MapView) findViewById(R.id.mapView);
-    mapView.addOnMapChangedListener(new MapView.OnMapChangedListener() {
+    mapView.setOnCameraIsChangingListener(new MapView.OnCameraIsChangingListener() {
       @Override
-      public void onMapChanged(int change) {
-        Timber.e("OnMapChange: %s, %s", change, mapChangeMap.get(change));
+      public void onCameraIsChanging() {
+        Timber.v("OnCameraIsChanging");
+      }
+    });
+
+    mapView.setOnCameraRegionDidChangeAnimatedListener(new MapView.OnCameraRegionDidChangeAnimatedListener() {
+      @Override
+      public void onCameraRegionDidChangeAnimated() {
+        Timber.v("OnCameraRegionDidChangeAnimated");
+      }
+    });
+
+    mapView.setOnCameraRegionDidChangeListener(new MapView.OnCameraRegionDidChangeListener() {
+      @Override
+      public void onCameraRegionDidChange() {
+        Timber.v("OnCameraRegionDidChange");
+      }
+    });
+
+    mapView.setOnCameraRegionWillChangeAnimatedListener(new MapView.OnCameraRegionWillChangeAnimatedListener() {
+      @Override
+      public void onCameraRegionWillChangeAnimated() {
+        Timber.v("OnCameraRegionWilChangeAnimated");
+      }
+    });
+
+    mapView.setOnCameraRegionWillChangeListener(new MapView.OnCameraRegionWillChangeListener() {
+      @Override
+      public void onCameraRegionWillChange() {
+        Timber.v("OnCameraRegionWilChange");
+      }
+    });
+
+    mapView.setOnDidFailLoadingMapListener(new MapView.OnDidFailLoadingMapListener() {
+      @Override
+      public void onDidFailLoadingMap() {
+        Timber.v("OnDidFailLoadingMap");
+      }
+    });
+
+    mapView.setOnDidFinishLoadingMapListener(new MapView.OnDidFinishLoadingMapListener() {
+      @Override
+      public void onDidFinishLoadingMap() {
+        Timber.v("OnDidFinishLoadingMap");
+      }
+    });
+
+    mapView.setOnDidFinishLoadingStyleListener(new MapView.OnDidFinishLoadingStyleListener() {
+      @Override
+      public void onDidFinishLoadingStyle() {
+        Timber.v("OnDidFinishLoadingStyle");
+      }
+    });
+
+    mapView.setOnDidFinishRenderingFrameFullyRenderedListener(new MapView.OnDidFinishRenderingFrameFullyRenderedListener() {
+      @Override
+      public void onDidFinishRenderingFrameFullyRendered() {
+        Timber.v("OnDidFinishRenderingFramefullyRendered");
+      }
+    });
+
+    mapView.setOnDidFinishRenderingFrameListener(new MapView.OnDidFinishRenderingFrameListener() {
+      @Override
+      public void onDidFinishRenderingFrame() {
+        Timber.v("OnDidFinishRenderingFrame");
+      }
+    });
+
+    mapView.setOnDidFinishRenderingMapFullyRenderedListener(new MapView.OnDidFinishRenderingMapFullyRenderedListener() {
+      @Override
+      public void onDidFinishRenderingMapFullyRendered() {
+        Timber.v("OnDidFinishRenderingFrameMapFullyRendered");
+      }
+    });
+
+    mapView.setOnDidFinishRenderingMapListener(new MapView.OnDidFinishRenderingMapListener() {
+      @Override
+      public void onDidFinishRenderingMap() {
+        Timber.v("OnDidFinishRenderingMap");
+      }
+    });
+
+    mapView.setOnSourceChangedListener(new MapView.OnSourceChangedListener() {
+      @Override
+      public void onSourceChangedListener() {
+        Timber.v("OnSourceChangedListener");
+      }
+    });
+
+    mapView.setOnWillStartLoadingMapListener(new MapView.OnWillStartLoadingMapListener() {
+      @Override
+      public void onWillStartLoadingMap() {
+        Timber.v("OnWillStartLoadingMap");
+      }
+    });
+
+    mapView.setOnWillStartRenderingFrameListener(new MapView.OnWillStartRenderingFrameListener() {
+      @Override
+      public void onWillStartRenderingFrame() {
+        Timber.v("OnWillStartRenderingFrame");
+      }
+    });
+
+    mapView.setOnWillStartRenderingMapListener(new MapView.OnWillStartRenderingMapListener() {
+      @Override
+      public void onWillStartRenderingMap() {
+        Timber.v("OnWillStartRenderingMap");
       }
     });
 
@@ -44,27 +148,6 @@ public class MapChangeActivity extends AppCompatActivity {
           new LatLng(55.754020, 37.620948), 12), 9000);
       }
     });
-  }
-
-  private LongSparseArray<String> buildMapChangeStringValueSparseArray() {
-    LongSparseArray<String> mapChangeArray = new LongSparseArray<>();
-    mapChangeArray.put(MapView.REGION_WILL_CHANGE, "Region will change");
-    mapChangeArray.put(MapView.REGION_WILL_CHANGE_ANIMATED, "Region will change animated");
-    mapChangeArray.put(MapView.REGION_IS_CHANGING, "Region is changing");
-    mapChangeArray.put(MapView.REGION_DID_CHANGE, "Region did change");
-    mapChangeArray.put(MapView.REGION_DID_CHANGE_ANIMATED, "Region did change animated");
-    mapChangeArray.put(MapView.WILL_START_LOADING_MAP, "Will start loading map");
-    mapChangeArray.put(MapView.DID_FINISH_LOADING_MAP, "Did finish loading map");
-    mapChangeArray.put(MapView.DID_FAIL_LOADING_MAP, "Did fail loading map");
-    mapChangeArray.put(MapView.WILL_START_RENDERING_FRAME, "Will start rendering frame");
-    mapChangeArray.put(MapView.DID_FINISH_RENDERING_FRAME, "Did finish rendering frame");
-    mapChangeArray.put(MapView.DID_FINISH_RENDERING_FRAME_FULLY_RENDERED, "Did finish rendering frame fully rendered");
-    mapChangeArray.put(MapView.WILL_START_RENDERING_MAP, "Will start rendering map");
-    mapChangeArray.put(MapView.DID_FINISH_RENDERING_MAP, "Did finish rendering map");
-    mapChangeArray.put(MapView.DID_FINISH_RENDERING_MAP_FULLY_RENDERED, "Did finish rendering map fully rendered");
-    mapChangeArray.put(MapView.DID_FINISH_LOADING_STYLE, "Did finish loading style");
-    mapChangeArray.put(MapView.SOURCE_DID_CHANGE, "Source did change");
-    return mapChangeArray;
   }
 
   @Override

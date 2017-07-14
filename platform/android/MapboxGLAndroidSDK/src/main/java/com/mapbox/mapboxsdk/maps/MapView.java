@@ -533,7 +533,6 @@ public class MapView extends FrameLayout {
   // Map events
   //
 
-
   /**
    * <p>
    * Add a callback that's invoked when the displayed map view changes.
