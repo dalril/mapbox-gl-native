@@ -40,7 +40,8 @@ class MapChangeDispatch {
     this.onCameraRegionWillChangeListener = onCameraRegionWillChangeListener;
   }
 
-  void setOnCameraRegionWillChangeAnimatedListener(MapView.OnCameraRegionWillChangeAnimatedListener onCameraRegionWillChangeAnimatedListener) {
+  void setOnCameraRegionWillChangeAnimatedListener(
+    MapView.OnCameraRegionWillChangeAnimatedListener onCameraRegionWillChangeAnimatedListener) {
     this.onCameraRegionWillChangeAnimatedListener = onCameraRegionWillChangeAnimatedListener;
   }
 
@@ -52,7 +53,8 @@ class MapChangeDispatch {
     this.onCameraRegionDidChangeListener = onCameraRegionDidChangeListener;
   }
 
-  void setOnCameraRegionDidChangeAnimatedListener(MapView.OnCameraRegionDidChangeAnimatedListener onCameraRegionDidChangeAnimatedListener) {
+  void setOnCameraRegionDidChangeAnimatedListener(
+    MapView.OnCameraRegionDidChangeAnimatedListener onCameraRegionDidChangeAnimatedListener) {
     this.onCameraRegionDidChangeAnimatedListener = onCameraRegionDidChangeAnimatedListener;
   }
 
@@ -68,15 +70,18 @@ class MapChangeDispatch {
     this.onDidFailLoadingMapListener = onDidFailLoadingMapListener;
   }
 
-  void setOnWillStartRenderingFrameListener(MapView.OnWillStartRenderingFrameListener onWillStartRenderingFrameListener) {
+  void setOnWillStartRenderingFrameListener(
+    MapView.OnWillStartRenderingFrameListener onWillStartRenderingFrameListener) {
     this.onWillStartRenderingFrameListener = onWillStartRenderingFrameListener;
   }
 
-  void setOnDidFinishRenderingFrameListener(MapView.OnDidFinishRenderingFrameListener onDidFinishRenderingFrameListener) {
+  void setOnDidFinishRenderingFrameListener(
+    MapView.OnDidFinishRenderingFrameListener onDidFinishRenderingFrameListener) {
     this.onDidFinishRenderingFrameListener = onDidFinishRenderingFrameListener;
   }
 
-  void setOnDidFinishRenderingFrameFullyRenderedListener(MapView.OnDidFinishRenderingFrameFullyRenderedListener onDidFinishRenderingFrameFullyRenderedListener) {
+  void setOnDidFinishRenderingFrameFullyRenderedListener(
+    MapView.OnDidFinishRenderingFrameFullyRenderedListener onDidFinishRenderingFrameFullyRenderedListener) {
     this.onDidFinishRenderingFrameFullyRenderedListener = onDidFinishRenderingFrameFullyRenderedListener;
   }
 
@@ -88,7 +93,8 @@ class MapChangeDispatch {
     this.onDidFinishRenderingMapListener = onDidFinishRenderingMapListener;
   }
 
-  void setOnDidFinishRenderingMapFullyRenderedListener(MapView.OnDidFinishRenderingMapFullyRenderedListener onDidFinishRenderingMapFullyRenderedListener) {
+  void setOnDidFinishRenderingMapFullyRenderedListener(
+    MapView.OnDidFinishRenderingMapFullyRenderedListener onDidFinishRenderingMapFullyRenderedListener) {
     this.onDidFinishRenderingMapFullyRenderedListener = onDidFinishRenderingMapFullyRenderedListener;
   }
 
@@ -223,7 +229,7 @@ class MapChangeDispatch {
     if (onDidFinishLoadingStyleListener != null) {
       onDidFinishLoadingStyleListener.onDidFinishLoadingStyle();
     }
-    if(mapCallback!=null){
+    if (mapCallback != null) {
       mapCallback.onDidFinishLoadingStyle();
     }
     onMapChange(MapView.DID_FINISH_LOADING_STYLE);

@@ -1,7 +1,6 @@
 package com.mapbox.mapboxsdk.testapp.activity.maplayout;
 
 import android.os.Bundle;
-import android.support.v4.util.LongSparseArray;
 import android.support.v7.app.AppCompatActivity;
 
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
@@ -83,12 +82,13 @@ public class MapChangeActivity extends AppCompatActivity {
       }
     });
 
-    mapView.setOnDidFinishRenderingFrameFullyRenderedListener(new MapView.OnDidFinishRenderingFrameFullyRenderedListener() {
-      @Override
-      public void onDidFinishRenderingFrameFullyRendered() {
-        Timber.v("OnDidFinishRenderingFramefullyRendered");
-      }
-    });
+    mapView.setOnDidFinishRenderingFrameFullyRenderedListener(
+      new MapView.OnDidFinishRenderingFrameFullyRenderedListener() {
+        @Override
+        public void onDidFinishRenderingFrameFullyRendered() {
+          Timber.v("OnDidFinishRenderingFramefullyRendered");
+        }
+      });
 
     mapView.setOnDidFinishRenderingFrameListener(new MapView.OnDidFinishRenderingFrameListener() {
       @Override

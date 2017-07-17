@@ -579,68 +579,69 @@ public class MapView extends FrameLayout {
     }
   }
 
-  public void setOnCameraRegionWillChangeListener(OnCameraRegionWillChangeListener onCameraRegionWillChangeListener) {
-    mapChangeDispatch.setOnCameraRegionWillChangeListener(onCameraRegionWillChangeListener);
+  public void setOnCameraRegionWillChangeListener(OnCameraRegionWillChangeListener listener) {
+    mapChangeDispatch.setOnCameraRegionWillChangeListener(listener);
   }
 
-  public void setOnCameraRegionWillChangeAnimatedListener(OnCameraRegionWillChangeAnimatedListener onCameraRegionWillChangeAnimatedListener) {
-    mapChangeDispatch.setOnCameraRegionWillChangeAnimatedListener(onCameraRegionWillChangeAnimatedListener);
+  public void setOnCameraRegionWillChangeAnimatedListener(OnCameraRegionWillChangeAnimatedListener listener) {
+    mapChangeDispatch.setOnCameraRegionWillChangeAnimatedListener(listener);
   }
 
-  public void setOnCameraIsChangingListener(OnCameraIsChangingListener onCameraIsChangingListener) {
-    mapChangeDispatch.setOnCameraIsChangingListener(onCameraIsChangingListener);
+  public void setOnCameraIsChangingListener(OnCameraIsChangingListener listener) {
+    mapChangeDispatch.setOnCameraIsChangingListener(listener);
   }
 
-  public void setOnCameraRegionDidChangeListener(OnCameraRegionDidChangeListener onCameraRegionDidChangeListener) {
-    mapChangeDispatch.setOnCameraRegionDidChangeListener(onCameraRegionDidChangeListener);
+  public void setOnCameraRegionDidChangeListener(OnCameraRegionDidChangeListener listener) {
+    mapChangeDispatch.setOnCameraRegionDidChangeListener(listener);
   }
 
-  public void setOnCameraRegionDidChangeAnimatedListener(OnCameraRegionDidChangeAnimatedListener onCameraRegionDidChangeAnimatedListener) {
-    mapChangeDispatch.setOnCameraRegionDidChangeAnimatedListener(onCameraRegionDidChangeAnimatedListener);
+  public void setOnCameraRegionDidChangeAnimatedListener(OnCameraRegionDidChangeAnimatedListener listener) {
+    mapChangeDispatch.setOnCameraRegionDidChangeAnimatedListener(listener);
   }
 
-  public void setOnWillStartLoadingMapListener(OnWillStartLoadingMapListener onWillStartLoadingMapListener) {
-    mapChangeDispatch.setOnWillStartLoadingMapListener(onWillStartLoadingMapListener);
+  public void setOnWillStartLoadingMapListener(OnWillStartLoadingMapListener listener) {
+    mapChangeDispatch.setOnWillStartLoadingMapListener(listener);
   }
 
-  public void setOnDidFinishLoadingMapListener(OnDidFinishLoadingMapListener onDidFinishLoadingMapListener) {
-    mapChangeDispatch.setOnDidFinishLoadingMapListener(onDidFinishLoadingMapListener);
+  public void setOnDidFinishLoadingMapListener(OnDidFinishLoadingMapListener listener) {
+    mapChangeDispatch.setOnDidFinishLoadingMapListener(listener);
   }
 
-  public void setOnDidFailLoadingMapListener(OnDidFailLoadingMapListener onDidFailLoadingMapListener) {
-    mapChangeDispatch.setOnDidFailLoadingMapListener(onDidFailLoadingMapListener);
+  public void setOnDidFailLoadingMapListener(OnDidFailLoadingMapListener listener) {
+    mapChangeDispatch.setOnDidFailLoadingMapListener(listener);
   }
 
-  public void setOnWillStartRenderingFrameListener(OnWillStartRenderingFrameListener onWillStartRenderingFrameListener) {
-    mapChangeDispatch.setOnWillStartRenderingFrameListener(onWillStartRenderingFrameListener);
+  public void setOnWillStartRenderingFrameListener(OnWillStartRenderingFrameListener listener) {
+    mapChangeDispatch.setOnWillStartRenderingFrameListener(listener);
   }
 
-  public void setOnDidFinishRenderingFrameListener(OnDidFinishRenderingFrameListener onDidFinishRenderingFrameListener) {
-    mapChangeDispatch.setOnDidFinishRenderingFrameListener(onDidFinishRenderingFrameListener);
+  public void setOnDidFinishRenderingFrameListener(OnDidFinishRenderingFrameListener listener) {
+    mapChangeDispatch.setOnDidFinishRenderingFrameListener(listener);
   }
 
-  public void setOnDidFinishRenderingFrameFullyRenderedListener(OnDidFinishRenderingFrameFullyRenderedListener onDidFinishRenderingFrameFullyRenderedListener) {
-    mapChangeDispatch.setOnDidFinishRenderingFrameFullyRenderedListener(onDidFinishRenderingFrameFullyRenderedListener);
+  public void setOnDidFinishRenderingFrameFullyRenderedListener(
+    OnDidFinishRenderingFrameFullyRenderedListener listener) {
+    mapChangeDispatch.setOnDidFinishRenderingFrameFullyRenderedListener(listener);
   }
 
-  public void setOnWillStartRenderingMapListener(OnWillStartRenderingMapListener onWillStartRenderingMapListener) {
-    mapChangeDispatch.setOnWillStartRenderingMapListener(onWillStartRenderingMapListener);
+  public void setOnWillStartRenderingMapListener(OnWillStartRenderingMapListener listener) {
+    mapChangeDispatch.setOnWillStartRenderingMapListener(listener);
   }
 
-  public void setOnDidFinishRenderingMapListener(OnDidFinishRenderingMapListener onDidFinishRenderingMapListener) {
-    mapChangeDispatch.setOnDidFinishRenderingMapListener(onDidFinishRenderingMapListener);
+  public void setOnDidFinishRenderingMapListener(OnDidFinishRenderingMapListener listener) {
+    mapChangeDispatch.setOnDidFinishRenderingMapListener(listener);
   }
 
-  public void setOnDidFinishRenderingMapFullyRenderedListener(OnDidFinishRenderingMapFullyRenderedListener onDidFinishRenderingMapFullyRenderedListener) {
-    mapChangeDispatch.setOnDidFinishRenderingMapFullyRenderedListener(onDidFinishRenderingMapFullyRenderedListener);
+  public void setOnDidFinishRenderingMapFullyRenderedListener(OnDidFinishRenderingMapFullyRenderedListener listener) {
+    mapChangeDispatch.setOnDidFinishRenderingMapFullyRenderedListener(listener);
   }
 
-  public void setOnDidFinishLoadingStyleListener(OnDidFinishLoadingStyleListener onDidFinishLoadingStyleListener) {
-    mapChangeDispatch.setOnDidFinishLoadingStyleListener(onDidFinishLoadingStyleListener);
+  public void setOnDidFinishLoadingStyleListener(OnDidFinishLoadingStyleListener listener) {
+    mapChangeDispatch.setOnDidFinishLoadingStyleListener(listener);
   }
 
-  public void setOnSourceChangedListener(OnSourceChangedListener onSourceChangedListener) {
-    mapChangeDispatch.setOnSourceChangedListener(onSourceChangedListener);
+  public void setOnSourceChangedListener(OnSourceChangedListener listener) {
+    mapChangeDispatch.setOnSourceChangedListener(listener);
   }
 
   /**
@@ -1128,7 +1129,7 @@ public class MapView extends FrameLayout {
 
     @Override
     public void onDidFinishLoadingStyle() {
-      if(initialLoad) {
+      if (initialLoad) {
         initialLoad = false;
         new Handler().post(new Runnable() {
           @Override

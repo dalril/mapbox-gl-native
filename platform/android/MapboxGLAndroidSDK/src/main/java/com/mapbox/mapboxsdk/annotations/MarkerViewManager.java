@@ -74,7 +74,7 @@ public class MarkerViewManager implements MapView.OnDidFinishRenderingFrameFully
 
   @Override
   public void onDidFinishRenderingFrameFullyRendered() {
-    if(isWaitingForRenderInvoke){
+    if (isWaitingForRenderInvoke) {
       isWaitingForRenderInvoke = false;
       invalidateViewMarkersInVisibleRegion();
     }
