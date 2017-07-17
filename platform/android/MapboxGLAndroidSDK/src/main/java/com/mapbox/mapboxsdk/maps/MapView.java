@@ -175,6 +175,9 @@ public class MapView extends FrameLayout {
     // notify Map object about current connectivity state
     nativeMapView.setReachability(ConnectivityReceiver.instance(context).isConnected(context));
 
+    // bind internal components for map change events
+    mapChangeDispatch.bind(transform);
+
     // initialise MapboxMap
     mapboxMap.initialise(context, options);
   }

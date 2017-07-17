@@ -24,6 +24,12 @@ class MapChangeDispatch {
   private MapView.OnDidFinishLoadingStyleListener onDidFinishLoadingStyleListener;
   private MapView.OnSourceChangedListener onSourceChangedListener;
 
+  private Transform transform;
+
+  void bind(Transform transform) {
+    this.transform = transform;
+  }
+
   void setOnCameraRegionWillChangeListener(MapView.OnCameraRegionWillChangeListener onCameraRegionWillChangeListener) {
     this.onCameraRegionWillChangeListener = onCameraRegionWillChangeListener;
   }
@@ -76,7 +82,7 @@ class MapChangeDispatch {
     this.onDidFinishRenderingMapListener = onDidFinishRenderingMapListener;
   }
 
- void setOnDidFinishRenderingMapFullyRenderedListener(MapView.OnDidFinishRenderingMapFullyRenderedListener onDidFinishRenderingMapFullyRenderedListener) {
+  void setOnDidFinishRenderingMapFullyRenderedListener(MapView.OnDidFinishRenderingMapFullyRenderedListener onDidFinishRenderingMapFullyRenderedListener) {
     this.onDidFinishRenderingMapFullyRenderedListener = onDidFinishRenderingMapFullyRenderedListener;
   }
 
@@ -119,6 +125,9 @@ class MapChangeDispatch {
   void onCameraRegionDidChangeAnimated() {
     if (onCameraRegionDidChangeAnimatedListener != null) {
       onCameraRegionDidChangeAnimatedListener.onCameraRegionDidChangeAnimated();
+    }
+    if (transform != null) {
+      transform.onCameraRegionDidChangeAnimated();
     }
     onMapChange(MapView.REGION_DID_CHANGE_ANIMATED);
   }
@@ -205,7 +214,7 @@ class MapChangeDispatch {
   //
 
   void onMapChange(int onMapChange) {
-    if(!onMapChangedListeners.isEmpty()) {
+    if (!onMapChangedListeners.isEmpty()) {
       for (MapView.OnMapChangedListener onMapChangedListener : onMapChangedListeners) {
         try {
           onMapChangedListener.onMapChanged(onMapChange);

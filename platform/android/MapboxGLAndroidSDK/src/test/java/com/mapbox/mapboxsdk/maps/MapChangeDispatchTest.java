@@ -62,11 +62,15 @@ public class MapChangeDispatchTest {
   @Mock
   private MapView.OnMapChangedListener onMapChangedListener;
 
+  @Mock
+  private Transform transform;
+
   @Before
   public void beforeTest() {
     MockitoAnnotations.initMocks(this);
     mapChangeDispatch = new MapChangeDispatch();
     mapChangeDispatch.addOnMapChangedListener(onMapChangedListener);
+    mapChangeDispatch.bind(transform);
   }
 
   @Test
@@ -107,6 +111,7 @@ public class MapChangeDispatchTest {
     mapChangeDispatch.onCameraRegionDidChangeAnimated();
     verify(onCameraRegionDidChangeAnimatedListener).onCameraRegionDidChangeAnimated();
     verify(onMapChangedListener).onMapChanged(MapView.REGION_DID_CHANGE_ANIMATED);
+    verify(transform).onCameraRegionDidChangeAnimated();
   }
 
   @Test
