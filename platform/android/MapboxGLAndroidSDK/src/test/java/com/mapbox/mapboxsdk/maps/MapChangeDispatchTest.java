@@ -70,12 +70,15 @@ public class MapChangeDispatchTest {
   @Mock
   private MarkerViewManager markerViewManager;
 
+  @Mock
+  private MapView.MapCallback mapCallback;
+
   @Before
   public void beforeTest() {
     MockitoAnnotations.initMocks(this);
     mapChangeDispatch = new MapChangeDispatch();
     mapChangeDispatch.addOnMapChangedListener(onMapChangedListener);
-    mapChangeDispatch.bind(transform, markerViewManager);
+    mapChangeDispatch.bind(mapCallback, transform, markerViewManager);
   }
 
   @Test
@@ -92,6 +95,7 @@ public class MapChangeDispatchTest {
     mapChangeDispatch.onCameraIsChanging();
     verify(onCameraIsChangingListener).onCameraIsChanging();
     verify(onMapChangedListener).onMapChanged(MapView.REGION_IS_CHANGING);
+    verify(mapCallback).onCameraIsChanging();
   }
 
   @Test
@@ -108,6 +112,7 @@ public class MapChangeDispatchTest {
     mapChangeDispatch.onCameraRegionDidChange();
     verify(onCameraRegionDidChangeListener).onCameraRegionDidChange();
     verify(onMapChangedListener).onMapChanged(MapView.REGION_DID_CHANGE);
+    verify(mapCallback).onCameraRegionDidChange();
   }
 
   @Test
@@ -133,6 +138,7 @@ public class MapChangeDispatchTest {
     mapChangeDispatch.onDidFinishLoadingMap();
     verify(onDidFinishLoadingMapListener).onDidFinishLoadingMap();
     verify(onMapChangedListener).onMapChanged(MapView.DID_FINISH_LOADING_MAP);
+    verify(mapCallback).onDidFinishLoadingMap();
   }
 
   @Test
@@ -157,6 +163,7 @@ public class MapChangeDispatchTest {
     mapChangeDispatch.onDidFinishRenderingFrame();
     verify(onDidFinishRenderingFrameListener).onDidFinishRenderingFrame();
     verify(onMapChangedListener).onMapChanged(MapView.DID_FINISH_RENDERING_FRAME);
+    verify(mapCallback).onDidFinishRenderingFrame();
   }
 
   @Test
@@ -166,6 +173,7 @@ public class MapChangeDispatchTest {
     verify(onDidFinishRenderingFrameFullyRenderedListener).onDidFinishRenderingFrameFullyRendered();
     verify(onMapChangedListener).onMapChanged(MapView.DID_FINISH_RENDERING_FRAME_FULLY_RENDERED);
     verify(markerViewManager).onDidFinishRenderingFrameFullyRendered();
+    verify(mapCallback).onDidFinishRenderingFrameFullyRendered();
   }
 
   @Test
@@ -198,6 +206,7 @@ public class MapChangeDispatchTest {
     mapChangeDispatch.onDidFinishLoadingStyle();
     verify(onDidFinishLoadingStyleListener).onDidFinishLoadingStyle();
     verify(onMapChangedListener).onMapChanged(MapView.DID_FINISH_LOADING_STYLE);
+    verify(mapCallback).onDidFinishLoadingStyle();
   }
 
   @Test

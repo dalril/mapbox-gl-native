@@ -176,7 +176,7 @@ public class MapView extends FrameLayout {
     nativeMapView.setReachability(ConnectivityReceiver.instance(context).isConnected(context));
 
     // bind internal components for map change events
-    mapChangeDispatch.bind(transform, markerViewManager);
+    mapChangeDispatch.bind(mapCallback = new MapCallback(mapboxMap), transform, markerViewManager);
 
     // initialise MapboxMap
     mapboxMap.initialise(context, options);
@@ -206,7 +206,6 @@ public class MapView extends FrameLayout {
     }
 
     initialiseDrawingSurface(textureMode);
-    addOnMapChangedListener(mapCallback = new MapCallback(mapboxMap));
   }
 
   private void initialiseDrawingSurface(boolean textureMode) {
@@ -1115,7 +1114,9 @@ public class MapView extends FrameLayout {
     }
   }
 
-  private static class MapCallback implements OnMapChangedListener {
+  static class MapCallback implements MapView.OnDidFinishLoadingStyleListener,
+    MapView.OnDidFinishRenderingFrameListener, MapView.OnDidFinishRenderingFrameFullyRenderedListener,
+    MapView.OnDidFinishLoadingMapListener, MapView.OnCameraIsChangingListener, MapView.OnCameraRegionDidChangeListener {
 
     private final MapboxMap mapboxMap;
     private final List<OnMapReadyCallback> onMapReadyCallbackList = new ArrayList<>();
@@ -1126,8 +1127,8 @@ public class MapView extends FrameLayout {
     }
 
     @Override
-    public void onMapChanged(@MapChange int change) {
-      if (change == DID_FINISH_LOADING_STYLE && initialLoad) {
+    public void onDidFinishLoadingStyle() {
+      if(initialLoad) {
         initialLoad = false;
         new Handler().post(new Runnable() {
           @Override
@@ -1137,11 +1138,32 @@ public class MapView extends FrameLayout {
             mapboxMap.onPostMapReady();
           }
         });
-      } else if (change == DID_FINISH_RENDERING_FRAME || change == DID_FINISH_RENDERING_FRAME_FULLY_RENDERED) {
-        mapboxMap.onUpdateFullyRendered();
-      } else if (change == REGION_IS_CHANGING || change == REGION_DID_CHANGE || change == DID_FINISH_LOADING_MAP) {
-        mapboxMap.onUpdateRegionChange();
       }
+    }
+
+    @Override
+    public void onDidFinishRenderingFrame() {
+      mapboxMap.onUpdateFullyRendered();
+    }
+
+    @Override
+    public void onDidFinishRenderingFrameFullyRendered() {
+      mapboxMap.onUpdateFullyRendered();
+    }
+
+    @Override
+    public void onDidFinishLoadingMap() {
+      mapboxMap.onUpdateRegionChange();
+    }
+
+    @Override
+    public void onCameraIsChanging() {
+      mapboxMap.onUpdateRegionChange();
+    }
+
+    @Override
+    public void onCameraRegionDidChange() {
+      mapboxMap.onUpdateRegionChange();
     }
 
     private void onMapReady() {

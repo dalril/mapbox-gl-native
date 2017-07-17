@@ -26,10 +26,12 @@ class MapChangeDispatch {
   private MapView.OnDidFinishLoadingStyleListener onDidFinishLoadingStyleListener;
   private MapView.OnSourceChangedListener onSourceChangedListener;
 
+  private MapView.MapCallback mapCallback;
   private Transform transform;
   private MarkerViewManager markerViewManager;
 
-  void bind(Transform transform, MarkerViewManager markerViewManager) {
+  void bind(MapView.MapCallback mapCallback, Transform transform, MarkerViewManager markerViewManager) {
+    this.mapCallback = mapCallback;
     this.transform = transform;
     this.markerViewManager = markerViewManager;
   }
@@ -116,12 +118,18 @@ class MapChangeDispatch {
     if (onCameraIsChangingListener != null) {
       onCameraIsChangingListener.onCameraIsChanging();
     }
+    if (mapCallback != null) {
+      mapCallback.onCameraIsChanging();
+    }
     onMapChange(MapView.REGION_IS_CHANGING);
   }
 
   void onCameraRegionDidChange() {
     if (onCameraRegionDidChangeListener != null) {
       onCameraRegionDidChangeListener.onCameraRegionDidChange();
+    }
+    if (mapCallback != null) {
+      mapCallback.onCameraRegionDidChange();
     }
     onMapChange(MapView.REGION_DID_CHANGE);
   }
@@ -147,6 +155,9 @@ class MapChangeDispatch {
     if (onDidFinishLoadingMapListener != null) {
       onDidFinishLoadingMapListener.onDidFinishLoadingMap();
     }
+    if (mapCallback != null) {
+      mapCallback.onDidFinishLoadingMap();
+    }
     onMapChange(MapView.DID_FINISH_LOADING_MAP);
   }
 
@@ -168,6 +179,9 @@ class MapChangeDispatch {
     if (onDidFinishRenderingFrameListener != null) {
       onDidFinishRenderingFrameListener.onDidFinishRenderingFrame();
     }
+    if (mapCallback != null) {
+      mapCallback.onDidFinishRenderingFrame();
+    }
     onMapChange(MapView.DID_FINISH_RENDERING_FRAME);
   }
 
@@ -177,6 +191,9 @@ class MapChangeDispatch {
     }
     if (markerViewManager != null) {
       markerViewManager.onDidFinishRenderingFrameFullyRendered();
+    }
+    if (mapCallback != null) {
+      mapCallback.onDidFinishRenderingFrameFullyRendered();
     }
     onMapChange(MapView.DID_FINISH_RENDERING_FRAME_FULLY_RENDERED);
   }
@@ -205,6 +222,9 @@ class MapChangeDispatch {
   void onDidFinishLoadingStyle() {
     if (onDidFinishLoadingStyleListener != null) {
       onDidFinishLoadingStyleListener.onDidFinishLoadingStyle();
+    }
+    if(mapCallback!=null){
+      mapCallback.onDidFinishLoadingStyle();
     }
     onMapChange(MapView.DID_FINISH_LOADING_STYLE);
   }
