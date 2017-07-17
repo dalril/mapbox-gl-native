@@ -1,5 +1,7 @@
 package com.mapbox.mapboxsdk.maps;
 
+import com.mapbox.mapboxsdk.annotations.MarkerViewManager;
+
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import timber.log.Timber;
@@ -25,9 +27,11 @@ class MapChangeDispatch {
   private MapView.OnSourceChangedListener onSourceChangedListener;
 
   private Transform transform;
+  private MarkerViewManager markerViewManager;
 
-  void bind(Transform transform) {
+  void bind(Transform transform, MarkerViewManager markerViewManager) {
     this.transform = transform;
+    this.markerViewManager = markerViewManager;
   }
 
   void setOnCameraRegionWillChangeListener(MapView.OnCameraRegionWillChangeListener onCameraRegionWillChangeListener) {
@@ -170,6 +174,9 @@ class MapChangeDispatch {
   void onDidFinishRenderingFrameFullyRendered() {
     if (onDidFinishRenderingFrameFullyRenderedListener != null) {
       onDidFinishRenderingFrameFullyRenderedListener.onDidFinishRenderingFrameFullyRendered();
+    }
+    if (markerViewManager != null) {
+      markerViewManager.onDidFinishRenderingFrameFullyRendered();
     }
     onMapChange(MapView.DID_FINISH_RENDERING_FRAME_FULLY_RENDERED);
   }

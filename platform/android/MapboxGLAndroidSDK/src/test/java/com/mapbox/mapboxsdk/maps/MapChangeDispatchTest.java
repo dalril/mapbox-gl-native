@@ -1,5 +1,7 @@
 package com.mapbox.mapboxsdk.maps;
 
+import com.mapbox.mapboxsdk.annotations.MarkerViewManager;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -65,12 +67,15 @@ public class MapChangeDispatchTest {
   @Mock
   private Transform transform;
 
+  @Mock
+  private MarkerViewManager markerViewManager;
+
   @Before
   public void beforeTest() {
     MockitoAnnotations.initMocks(this);
     mapChangeDispatch = new MapChangeDispatch();
     mapChangeDispatch.addOnMapChangedListener(onMapChangedListener);
-    mapChangeDispatch.bind(transform);
+    mapChangeDispatch.bind(transform, markerViewManager);
   }
 
   @Test
@@ -160,6 +165,7 @@ public class MapChangeDispatchTest {
     mapChangeDispatch.onDidFinishRenderingFrameFullyRendered();
     verify(onDidFinishRenderingFrameFullyRenderedListener).onDidFinishRenderingFrameFullyRendered();
     verify(onMapChangedListener).onMapChanged(MapView.DID_FINISH_RENDERING_FRAME_FULLY_RENDERED);
+    verify(markerViewManager).onDidFinishRenderingFrameFullyRendered();
   }
 
   @Test

@@ -142,8 +142,8 @@ public class MapView extends FrameLayout {
     Markers markers = new MarkerContainer(nativeMapView, this, annotationsArray, iconManager, markerViewManager);
     Polygons polygons = new PolygonContainer(nativeMapView, annotationsArray);
     Polylines polylines = new PolylineContainer(nativeMapView, annotationsArray);
-    AnnotationManager annotationManager = new AnnotationManager(nativeMapView, this, annotationsArray,
-      markerViewManager, iconManager, annotations, markers, polygons, polylines);
+    AnnotationManager annotationManager = new AnnotationManager(this, annotationsArray, markerViewManager,
+      iconManager, annotations, markers, polygons, polylines);
     Transform transform = new Transform(nativeMapView, annotationManager.getMarkerViewManager(), trackingSettings,
       cameraChangeDispatcher);
     mapboxMap = new MapboxMap(nativeMapView, transform, uiSettings, trackingSettings, myLocationViewSettings, proj,
@@ -176,7 +176,7 @@ public class MapView extends FrameLayout {
     nativeMapView.setReachability(ConnectivityReceiver.instance(context).isConnected(context));
 
     // bind internal components for map change events
-    mapChangeDispatch.bind(transform);
+    mapChangeDispatch.bind(transform, markerViewManager);
 
     // initialise MapboxMap
     mapboxMap.initialise(context, options);
